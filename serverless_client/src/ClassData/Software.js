@@ -1,3 +1,5 @@
+import { Track } from "./Track";
+
 class Software extends Track {
   constructor() {
     super("Software");
@@ -57,3 +59,5 @@ class Software extends Track {
     return false;
   }
 }
+
+export {Software}

@@ -1,3 +1,5 @@
+import { Track } from "./Track";
+
 class Databases extends Track {
   constructor() {
     super("Databases");
@@ -70,3 +72,5 @@ class Databases extends Track {
     return true;
   }
 }
+
+export {Databases}

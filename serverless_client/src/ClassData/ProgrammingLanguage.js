@@ -1,3 +1,5 @@
+import { Track } from "./Track";
+
 class ProgrammingLanguages extends Track {
   constructor() {
     super("Programming Languages");
@@ -65,3 +67,5 @@ class ProgrammingLanguages extends Track {
     return false;
   }
 }
+
+export {ProgrammingLanguages}

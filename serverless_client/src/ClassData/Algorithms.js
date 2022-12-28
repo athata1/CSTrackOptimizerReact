@@ -1,3 +1,5 @@
+import { Track } from "./Track";
+
 class Algorithm extends Track {
 
   constructor() {
@@ -83,3 +85,5 @@ class Algorithm extends Track {
     return matches >= 3;
   }
 }
+
+export {Algorithm}

@@ -1,3 +1,5 @@
+import { Track } from "./Track";
+
 class MachineIntelligence extends Track {
   constructor() {
     super("Machine Intelligence");
@@ -61,3 +63,5 @@ class MachineIntelligence extends Track {
     return false;
   }
 }
+
+export {MachineIntelligence}

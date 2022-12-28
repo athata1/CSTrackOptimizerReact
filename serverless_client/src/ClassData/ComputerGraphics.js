@@ -1,3 +1,5 @@
+import { Track } from "./Track";
+
 class ComputerGraphics extends Track {
   constructor() {
     super("Computer Graphics");
@@ -66,3 +68,5 @@ class ComputerGraphics extends Track {
     return matches >= 3;
     }
 }
+
+export {ComputerGraphics}

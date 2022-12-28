@@ -1,3 +1,5 @@
+import { Track } from "./Track";
+
 class Security extends Track {
   constructor() {
     super("Security");
@@ -66,3 +68,5 @@ class Security extends Track {
     return matches >= 3;
   }
 }
+
+export {Security}

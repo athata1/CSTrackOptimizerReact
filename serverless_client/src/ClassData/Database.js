@@ -29,3 +29,5 @@ class Database {
     this.currIndex++;
   }
 }
+
+export {Database}

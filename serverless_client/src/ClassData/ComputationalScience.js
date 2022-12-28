@@ -1,3 +1,5 @@
+import { Track } from "./Track";
+
 class ComputationalScience extends Track {
   constructor() {
     super("Computational Science");
@@ -90,3 +92,5 @@ class ComputationalScience extends Track {
     return false;
   }
 }
+
+export {ComputationalScience}
