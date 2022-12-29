@@ -1,4 +1,5 @@
 import { Track } from "./Track";
+import { Database } from "./Database";
 
 class ComputerGraphics extends Track {
   constructor() {
@@ -56,7 +57,7 @@ class ComputerGraphics extends Track {
         count++;
     matches += count;
     for (const s of this.elective) {
-        if (s == Database.getInt("CS373") || s == Database.getInt("CS434") || s == Database.getInt("CS471"))
+        if (s === Database.getInt("CS373") || s === Database.getInt("CS434") || s === Database.getInt("CS471"))
             continue;
         if (courses.includes(s)) {
             matches++;

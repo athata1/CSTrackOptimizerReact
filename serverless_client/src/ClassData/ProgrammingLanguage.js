@@ -1,4 +1,5 @@
 import { Track } from "./Track";
+import { Database } from "./Database";
 
 class ProgrammingLanguages extends Track {
   constructor() {
@@ -49,13 +50,13 @@ class ProgrammingLanguages extends Track {
     if (matches >= 3)
         return true;
     for (const s of this.elective) {
-        if (s == (Database.getInt("CS307")) || s == (Database.getInt("CS408")))
+        if (s === (Database.getInt("CS307")) || s === (Database.getInt("CS408")))
             continue;
 
-        if (s == (Database.getInt("CS348")) || s == (Database.getInt("CS448")))
+        if (s === (Database.getInt("CS348")) || s === (Database.getInt("CS448")))
             continue;
 
-        if (s == (Database.getInt("MA385")) || s == (Database.getInt("MA453")))
+        if (s === (Database.getInt("MA385")) || s === (Database.getInt("MA453")))
             continue;
 
         if (courses.includes(s))

@@ -1,4 +1,5 @@
 import { Track } from "./Track";
+import { Database } from "./Database";
 
 class MachineIntelligence extends Track {
   constructor() {
@@ -51,7 +52,7 @@ class MachineIntelligence extends Track {
     }
 
     for (const s of this.elective) {
-        if (s == (Database.getInt("CS471")) || s == (Database.getInt("CS473")))
+        if (s === (Database.getInt("CS471")) || s === (Database.getInt("CS473")))
             continue;
 
         if (courses.includes(s))

@@ -1,4 +1,5 @@
 import { Track } from "./Track";
+import { Database } from "./Database";
 
 class Software extends Track {
   constructor() {
@@ -50,7 +51,7 @@ class Software extends Track {
     }
 
     for (const s of this.elective) {
-        if (s == Database.getInt("CS354") || s == Database.getInt("CS352"))
+        if (s === Database.getInt("CS354") || s === Database.getInt("CS352"))
             continue;
         if (courses.includes(s))
             return true;

@@ -1,4 +1,5 @@
 import { Track } from "./Track";
+import { Database } from "./Database";
 
 class Systems extends Track {
   constructor() {
@@ -40,7 +41,7 @@ class Systems extends Track {
     for (const s of this.elective) {
         if (courses.includes(s))
             matches++;
-        if (matches == 3)
+        if (matches === 3)
             return true;
     }
 

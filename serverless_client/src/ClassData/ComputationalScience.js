@@ -1,10 +1,11 @@
 import { Track } from "./Track";
+import { Database } from "./Database";
 
 class ComputationalScience extends Track {
   constructor() {
     super("Computational Science");
     this.required = ["CS314", "CS381"];
-    this.elective = [... new Set(["MA266", "MA366", "CS373", "CS473", "CS478", "IE336", "ECE301", "CS352", "CS353", "CS354", "CS307", "CS422", "CS456", "CS471", "CS483", "CS514", "CS515", "CS520", "CS525", "IE335", "MA341", "MA440"])];
+    this.elective = [...new Set(["MA266", "MA366", "CS373", "CS473", "CS478", "IE336", "ECE301", "CS352", "CS353", "CS354", "CS307", "CS422", "CS456", "CS471", "CS483", "CS514", "CS515", "CS520", "CS525", "IE335", "MA341", "MA440"])];
 
     let len = this.required.length;
     for (let i = 0; i < len; i++) {
@@ -52,7 +53,7 @@ class ComputationalScience extends Track {
 
     let csCount = 0;
     for (const course of courses) {
-      if (Database.getCourse(course).length >= 2 && new String(Database.getCourse(course).substring(0,2)).valueOf() == new String("CS").valueOf()) {
+      if (Database.getCourse(course).length >= 2 && new String(Database.getCourse(course).substring(0,2)).valueOf() === new String("CS").valueOf()) {
         csCount++;
       }
     }
@@ -73,14 +74,14 @@ class ComputationalScience extends Track {
 
     let matches = 0;
     for (const s of this.elective) {
-        if (s == Database.getInt("MA366") || s == Database.getInt("MA266"))
+        if (s === Database.getInt("MA366") || s === Database.getInt("MA266"))
             continue;
-        if (s == (Database.getInt("CS373")) || s == (Database.getInt("CS473"))
-                || s == (Database.getInt("CS478")) ||
-                s == (Database.getInt("IE336")) || s ==Database.getInt("ECE301"))
+        if (s === (Database.getInt("CS373")) || s === (Database.getInt("CS473"))
+                || s === (Database.getInt("CS478")) ||
+                s === (Database.getInt("IE336")) || s ===Database.getInt("ECE301"))
             continue;
 
-        if (s == (Database.getInt("CS352")) || s == (Database.getInt("CS353")) || s == (Database.getInt("CS354")))
+        if (s === (Database.getInt("CS352")) || s === (Database.getInt("CS353")) || s === (Database.getInt("CS354")))
             continue;
 
         if (courses.includes(s)) {
