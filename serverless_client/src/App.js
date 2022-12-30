@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import Navbar from './Components/Navbar';
 import Step1 from './Components/Step1'
+import Step2 from './Components/Step2';
 import { SmallestNumberOfClasses } from './ClassData/SmallestNumberOfClasses';
 import './App.css';
 
@@ -14,13 +15,23 @@ function App() {
     for (const elem of tracks) {
       classAlgo.current.addTrack(elem);
     }
+    classAlgo.current.addRequiredAndElectives();
     setStep(step + 1);
+    console.log(classAlgo.current)
   }
 
   useEffect(() => {
     document.body.style.backgroundColor = '#918f90'
   }, [])
 
+
+  function addCourses(courses) {
+    for (const course of courses) {
+        classAlgo.current.addCourse(course);
+    }
+
+    setStep(step + 1);
+  }
 
   return (
     <>
@@ -32,6 +43,10 @@ function App() {
               Step {step}
             </div>
             {step === 1 ? <Step1 addTracksCallback={addTracks}/> : <></>}
+
+            {step === 2 ? <Step2 handleCourseAdding={addCourses} electives = {[...classAlgo.current.totalElectives]}/> : <></>}
+
+           
           </div>
         </div>
       </div>
