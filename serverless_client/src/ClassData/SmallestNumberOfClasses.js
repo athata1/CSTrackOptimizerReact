@@ -9,6 +9,9 @@ import {Security} from './Security'
 import {Software} from './Software'
 import {Systems} from './Systems'
 
+
+// Displays course preferences based on how likely they are to
+// show up during a semester
 let coursePrecedence = {};
 coursePrecedence["CS307"] = 8;
 coursePrecedence["CS348"] = 8;
@@ -214,6 +217,8 @@ coursePrecedence["CS593-RL1"] = 1;
 coursePrecedence["CS593-ROB"] = 1;
 coursePrecedence["CS638"] = 1;
 
+
+// Data to ensure that prerequisites are met before taking successor course
 let prereqs = {};
 prereqs["CS353"] = "CS352";
 prereqs["CS422"] = "CS354";
@@ -232,6 +237,9 @@ class SmallestNumberOfClasses {
     this.index = 0;
   }
 
+  /*
+   * Add track to trackList based on index number
+   */
   addTrack(index) {
     switch(index) {
       case 0:
@@ -267,11 +275,20 @@ class SmallestNumberOfClasses {
     }
   }
 
+
+  /*
+   * Add course to required courses
+   */
   addCourse(course) {
-    this.requiredCourses.push(Database.getInt(course));
-    //this.totalElectives.splice(this.totalElectives.indexOf(Database.getInt(course), 1));
+    this.requiredCourses.push(course);
+    this.totalElectives.splice(this.totalElectives.indexOf(course), 1);
   }
 
+
+  /*
+   * After all tracks have been added, the required and elective
+   * courses are determined
+   */
   addRequiredAndElectives() {
     this.trackList.forEach(track => {
       track.required.forEach(course => {
@@ -286,6 +303,8 @@ class SmallestNumberOfClasses {
           this.totalElectives.push(course);
       });
     });
+
+    //Sort electives based on their priority and their course type (CS/MA/...)
     this.totalElectives = this.totalElectives.map((num) => Database.getCourse(num)).sort((a,b) => {
       let valA = 0;
       let valB = 0;
@@ -295,20 +314,24 @@ class SmallestNumberOfClasses {
       if (b in coursePrecedence) {
         valB = coursePrecedence[b];
       }
-      if (valA != 0 && valB != 0 && Math.abs(valA - valB) <= 2) {
+      if (valA !== 0 && valB !== 0 && Math.abs(valA - valB) <= 2) {
         return a.localeCompare(b);
       }
-      if ((valA != 0 || valB != 0) && valA != valB)
+      if ((valA !== 0 || valB !== 0) && valA !== valB)
         return valB - valA;
       return a.localeCompare(b);
     }).map(course => Database.getInt(course));
   }
 
+  /*
+   * Determine best selective requirements through the use
+   * of Cartesian Products.
+   */
   getAllCombinations(requirements, index, combinations, curr) {
-    if (index == requirements.length) {
+    if (index === requirements.length) {
       let temp = curr.slice();
       for (let i = temp.length; i >= 0; i--) {
-        if (temp.indexOf(temp[i]) != i) {
+        if (temp.indexOf(temp[i]) !== i) {
           temp.splice(i,1);
         }
       }
@@ -327,20 +350,26 @@ class SmallestNumberOfClasses {
     return;
   }
 
-  
+  /*
+   * Get all selective requirements that have not been satisfied
+   * by the current required courses
+   */
   getNextUnfinishedRequirements() {
     for (let i = this.index; i < this.trackList.length; i++) {
       this.index = i + 1;
       let arr = this.trackList[i].getUnfinishedRequirements(this.requiredCourses);
-      if (arr.length != 0)
+      if (arr.length !== 0)
         return arr;
     }
     return null;
   }
 
+  /*
+   * Determine the minimum number of courses required to complete 
+   * the tracks in Step 1. The value returned is the index value of
+   * the associated course
+   */
   getMinClasses() {
-
-    console.log(this.requiredCourses);
     for (const [key, value] of Object.entries(prereqs)) {
       Database.addCourse(value);
       Database.addCourse(key);
@@ -351,10 +380,12 @@ class SmallestNumberOfClasses {
       }
     }
 
+    //console.log(this.requiredCourses)
+    //console.log(this.totalElectives)
     let requirements = [];
     while (true) {
       let list = this.getNextUnfinishedRequirements();
-      if (list == null) {
+      if (list === null) {
         break;
       }
       for (const requirement of list) {
@@ -363,17 +394,17 @@ class SmallestNumberOfClasses {
     }
     
     let queue = [];
-    if (requirements.length != 0) {
+    if (requirements.length !== 0) {
       let comb = [];
       this.getAllCombinations(requirements, 0, comb, []);
-      if (comb.length == 0) {
+      if (comb.length === 0) {
         return null;
       }
       comb = [...new Set(comb.map((obj) =>JSON.stringify(obj)))].map((json) => JSON.parse(json)).sort((a,b)=>a.length - b.length);
 
       let min = comb[0].length;
       for (let i = 0; i < comb.length; i++) {
-        if (comb[i].length != min) {
+        if (comb[i].length !== min) {
           break;
         }
         let req = this.requiredCourses.slice();
@@ -385,7 +416,7 @@ class SmallestNumberOfClasses {
         queue.push([req,elec]);
       }
     }
-    if (queue.length == 0) {
+    if (queue.length === 0) {
       queue.push([this.requiredCourses.slice(), this.totalElectives.slice()]);
     }
    
@@ -394,7 +425,7 @@ class SmallestNumberOfClasses {
         return recElec[0];
     }
 
-   while (queue.length != 0) {
+   while (queue.length !== 0) {
       let size = queue.length;
       for (let i = 0; i < size; i++) {
         let recElec = queue.shift();
@@ -418,6 +449,10 @@ class SmallestNumberOfClasses {
     return null;
   }
 
+  /*
+   * Determine if all courses have been satisfied for the given
+   * tracks
+   */
   allCoursesSatisfied(courses) {
     for (const track of this.trackList) {
       if (!track.isCompleted(courses)) {

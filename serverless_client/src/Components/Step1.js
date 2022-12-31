@@ -2,7 +2,10 @@ import React, {useState} from 'react'
 
 export default function Step1({addTracksCallback}) {
 
+  //All tracks currently being selected
   const [tracks, setTracks] = useState([]);
+
+  //All buttons to be added to the page
   const [trackNames] = useState(["Databases","Computational Science", "Computer Graphics", "Algorithms", "Programming Languages", "Software", "Systems", "Security", "Machine Intelligence"])
 
   function toggleTrack(trackIndex) {
@@ -14,6 +17,7 @@ export default function Step1({addTracksCallback}) {
       setTracks(newTracks);
   }
 
+  //Ensure that button is ignored when disabled
   function handleClick(e) {
     if (tracks.length === 0) return;
     addTracksCallback(tracks);

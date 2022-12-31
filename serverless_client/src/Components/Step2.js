@@ -1,18 +1,15 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import { Database } from '../ClassData/Database';
 export default function Step2({handleCourseAdding, electives}) {
 
+  //Courses that are to be added to class
   const [addedCourses, setAddedCourses] = useState([]);
-  const [modifiedElectives, setModifiedElectives] = useState([]);
 
-  useEffect(() => {
-    const newModifiedElectives = [...modifiedElectives];
-    for (const courseNum of electives) {
-      newModifiedElectives.push(courseNum);
-    }
-    setModifiedElectives(newModifiedElectives);
-  }, [])
+  //Electives that can be added to the final result
+  const [modifiedElectives, setModifiedElectives] = useState([...electives]);
 
+
+  //This method switches the course from modifiedElectives to addedCourses
   function addCourse(courseNum) {
       const newAddedCourse = [...addedCourses];
       newAddedCourse.push(courseNum);
@@ -23,6 +20,7 @@ export default function Step2({handleCourseAdding, electives}) {
       setModifiedElectives(newModifiedElectives)
   }
 
+  //This method switches the course from addedCourses to modifiedElectives
   function removeCourse(courseNum) {
     const newAddedCourse = [...addedCourses];
     newAddedCourse.splice(newAddedCourse.indexOf(courseNum), 1)
@@ -38,7 +36,7 @@ export default function Step2({handleCourseAdding, electives}) {
     <div className="content">
         <div id="courses">
           {modifiedElectives.map((courseNum) => {
-            return <div className="course" onClick={() => {addCourse(courseNum)}}>
+            return <div key={courseNum} className="course" onClick={() => {addCourse(courseNum)}}>
               <div className="course-abbr">
                 {Database.getCourse(courseNum)}
               </div>
@@ -53,7 +51,7 @@ export default function Step2({handleCourseAdding, electives}) {
         <div id="added">
           {addedCourses.map((courseNum) => {
             return <>
-            <div className="removed-container">
+            <div key={courseNum} className="removed-container">
               <div className="course">
                 <div className="course-abbr">
                   {Database.getAbbr(courseNum)}
