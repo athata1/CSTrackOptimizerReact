@@ -36,7 +36,7 @@ export default function Step3({loading, finalCourseArray, courseAlgo}) {
         })}
       </div>
     </div>
-    <a href = "https://athata1.github.io/CSTrackOptimizer/" id = "retry-button">Retry</a>
+    <a href = "https://athata1.github.io/CSTrackOptimizerReact/" id = "retry-button">Retry</a>
     </>
   )
 }
