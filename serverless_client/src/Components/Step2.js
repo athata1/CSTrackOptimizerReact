@@ -65,7 +65,7 @@ export default function Step2({handleCourseAdding, electives}) {
             </>
         })}
         </div>
-        <button id = "step-2" className="submit" onClick={() => {
+        <button tabindex={0} id = "step-2" className="submit" onClick={() => {
           handleCourseAdding(addedCourses)
         }}>Next</button>
     </div>

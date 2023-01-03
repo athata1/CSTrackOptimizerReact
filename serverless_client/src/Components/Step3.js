@@ -29,14 +29,14 @@ export default function Step3({loading, finalCourseArray, courseAlgo}) {
       </div>
       <div id = "result">
         {finalCourseArray.current.map((course) => {
-          return <div tabindex={0} className='result-data'>
+          return <div tabindex={0}  className='result-data'>
             <div className='result-abbr'>{Database.getCourse(course)}</div>
             <div className='result-name'>{Database.getAbbr(course)}</div>
           </div>
         })}
       </div>
     </div>
-    <a href = "https://athata1.github.io/CSTrackOptimizerReact/" id = "retry-button">Retry</a>
+    <a tabindex={0} href = "https://athata1.github.io/CSTrackOptimizerReact/" id = "retry-button">Retry</a>
     </>
   )
 }
