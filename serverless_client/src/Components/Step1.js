@@ -28,6 +28,7 @@ export default function Step1({addTracksCallback}) {
         <div className="track-list">
           {trackNames.map((elem, idx) => {
             return <div 
+                tabIndex={0}
                 key={trackNames[idx]} 
                 className= {tracks.indexOf(idx) === -1 ? "track" : "track track-selected"} 
                 onClick={() => {toggleTrack(idx)}}>
@@ -36,6 +37,7 @@ export default function Step1({addTracksCallback}) {
           })}
         </div>
         <button 
+          tabIndex={0}
           id = "step-1" 
           className={tracks.length === 0 ? "submit not-selected" : "submit"}
           onClick={handleClick}>

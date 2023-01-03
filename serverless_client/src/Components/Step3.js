@@ -29,7 +29,7 @@ export default function Step3({loading, finalCourseArray, courseAlgo}) {
       </div>
       <div id = "result">
         {finalCourseArray.current.map((course) => {
-          return <div className='result-data'>
+          return <div tabindex={0} className='result-data'>
             <div className='result-abbr'>{Database.getCourse(course)}</div>
             <div className='result-name'>{Database.getAbbr(course)}</div>
           </div>

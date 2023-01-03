@@ -36,7 +36,7 @@ export default function Step2({handleCourseAdding, electives}) {
     <div className="content">
         <div id="courses">
           {modifiedElectives.map((courseNum) => {
-            return <div key={courseNum} className="course" onClick={() => {addCourse(courseNum)}}>
+            return <div tabindex={0}    key={courseNum} className="course" onClick={() => {addCourse(courseNum)}}>
               <div className="course-abbr">
                 {Database.getCourse(courseNum)}
               </div>
@@ -51,7 +51,7 @@ export default function Step2({handleCourseAdding, electives}) {
         <div id="added">
           {addedCourses.map((courseNum) => {
             return <>
-            <div key={courseNum} className="removed-container">
+            <div tabindex={0} key={courseNum} className="removed-container">
               <div className="course">
                 <div className="course-abbr">
                   {Database.getAbbr(courseNum)}
