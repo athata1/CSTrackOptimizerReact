@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Database } from '../ClassData/Database'
 
 
-export default function Step3({loading, finalCourseArray, courseAlgo}) {
+export default function Step3({loading, finalCourseArray, courseAlgo, setHeightCallback}) {
 
+  const parentRef = useRef();
+
+  useEffect(() => {
+    setHeightCallback(parentRef.current.offsetHeight);
+  }, [])
   //Display loader if required
   if (loading) {
     return <>
@@ -20,7 +25,7 @@ export default function Step3({loading, finalCourseArray, courseAlgo}) {
 
   return (
     <>
-    <div className="content">
+    <div ref={parentRef} className="content">
       <div id="select">
       <div style={{fontSize: '1.75rem', textDecoration: 'underline'}}>Selected Tracks</div>
         {courseAlgo.current.trackList.map((track) => {
@@ -35,8 +40,9 @@ export default function Step3({loading, finalCourseArray, courseAlgo}) {
           </div>
         })}
       </div>
+      <a tabindex={0} href = "https://athata1.github.io/CSTrackOptimizerReact/" id = "retry-button">Retry</a>
     </div>
-    <a tabindex={0} href = "https://athata1.github.io/CSTrackOptimizerReact/" id = "retry-button">Retry</a>
+
     </>
   )
 }

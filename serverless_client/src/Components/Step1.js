@@ -1,12 +1,18 @@
-import React, {useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 
-export default function Step1({addTracksCallback}) {
+export default function Step1({addTracksCallback, setHeightCallback}) {
 
   //All tracks currently being selected
   const [tracks, setTracks] = useState([]);
 
   //All buttons to be added to the page
   const [trackNames] = useState(["Databases","Computational Science", "Computer Graphics", "Algorithms", "Programming Languages", "Software", "Systems", "Security", "Machine Intelligence"])
+
+  const parentRef = useRef();
+
+  useEffect(() => {
+    setHeightCallback(parentRef.current.offsetHeight)
+  }, [])
 
   function toggleTrack(trackIndex) {
       const newTracks = [...tracks];
@@ -24,7 +30,7 @@ export default function Step1({addTracksCallback}) {
   }
 
   return (
-    <div className="content">
+    <div ref={parentRef}className="content">
         <div className="track-list">
           {trackNames.map((elem, idx) => {
             return <div 

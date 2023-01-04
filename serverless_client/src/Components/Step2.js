@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import { Database } from '../ClassData/Database';
-export default function Step2({handleCourseAdding, electives}) {
+export default function Step2({handleCourseAdding, electives, setHeightCallback}) {
 
   //Courses that are to be added to class
   const [addedCourses, setAddedCourses] = useState([]);
@@ -8,6 +8,11 @@ export default function Step2({handleCourseAdding, electives}) {
   //Electives that can be added to the final result
   const [modifiedElectives, setModifiedElectives] = useState([...electives]);
 
+  const parentRef = useRef();
+
+  useEffect(() => {
+    setHeightCallback(parentRef.current.offSetHeight)
+  }, [])
 
   //This method switches the course from modifiedElectives to addedCourses
   function addCourse(courseNum) {
@@ -33,10 +38,10 @@ export default function Step2({handleCourseAdding, electives}) {
 }
 
   return (
-    <div className="content">
+    <div ref={parentRef}className="content">
         <div id="courses">
           {modifiedElectives.map((courseNum) => {
-            return <div tabindex={0}    key={courseNum} className="course" onClick={() => {addCourse(courseNum)}}>
+            return <div tabIndex={0}    key={courseNum} className="course" onClick={() => {addCourse(courseNum)}}>
               <div className="course-abbr">
                 {Database.getCourse(courseNum)}
               </div>
@@ -51,7 +56,7 @@ export default function Step2({handleCourseAdding, electives}) {
         <div id="added">
           {addedCourses.map((courseNum) => {
             return <>
-            <div tabindex={0} key={courseNum} className="removed-container">
+            <div tabIndex={0} key={courseNum} className="removed-container">
               <div className="course">
                 <div className="course-abbr">
                   {Database.getAbbr(courseNum)}

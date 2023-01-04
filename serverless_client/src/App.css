@@ -247,3 +247,46 @@ nav #nav .title {
   width:88%;
   border: 1px solid black;
 }
+
+.step-container {
+  width: 100%;
+  height: 1000px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+
+  transition: height 500ms ease;
+}
+
+
+.step-initial {
+  width: 100%;
+}
+
+.step-enter {
+  position: relative;
+  transform: translateX(-100%);
+}
+
+.step-enter-active {
+  transform: translateX(0%);
+  transition: transform 500ms ease;
+}
+
+.step-exit {
+  position: relative;
+  transform: translateX(0%);
+}
+
+.step-exit-active {
+  transform: translate(100%);
+  transition: transform 500ms ease;
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
