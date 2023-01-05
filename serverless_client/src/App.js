@@ -62,7 +62,6 @@ function App() {
       <Navbar/>
       <div id="box">
         <div className="container">
-          <div className='margin'>
             <div className="step">
               Step {step}
             </div>
@@ -97,7 +96,6 @@ function App() {
                 </div>
               </CSSTransition>
             </div>
-          </div>
         </div>
       </div>
     </>
