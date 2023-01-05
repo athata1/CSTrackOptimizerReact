@@ -7,7 +7,13 @@ export default function Step3({loading, finalCourseArray, courseAlgo, setHeightC
   const parentRef = useRef();
 
   useEffect(() => {
-    setHeightCallback(parentRef.current.offsetHeight);
+    if (!parentRef.current) return;
+    console.log(parentRef.current)
+    const resizeObserber = new ResizeObserver(() => {
+      setHeightCallback(parentRef.current.offsetHeight);
+    });
+    resizeObserber.observe(parentRef.current);
+    return () => resizeObserber.disconnect();
   }, [])
   //Display loader if required
   if (loading) {

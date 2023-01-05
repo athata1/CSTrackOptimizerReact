@@ -11,7 +11,13 @@ export default function Step2({handleCourseAdding, electives, setHeightCallback}
   const parentRef = useRef();
 
   useEffect(() => {
-    setHeightCallback(parentRef.current.offSetHeight)
+    if (!parentRef.current) return;
+    console.log(parentRef.current)
+    const resizeObserber = new ResizeObserver(() => {
+      setHeightCallback(parentRef.current.offsetHeight);
+    });
+    resizeObserber.observe(parentRef.current);
+    return () => resizeObserber.disconnect();
   }, [])
 
   //This method switches the course from modifiedElectives to addedCourses

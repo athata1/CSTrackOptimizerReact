@@ -1,3 +1,7 @@
+:root {
+  --transition-speed: 500ms;
+}
+
 html,body {
   margin: 0;
   padding: 0;
@@ -255,7 +259,7 @@ nav #nav .title {
   overflow-y: hidden;
   position: relative;
 
-  transition: height 500ms ease;
+  transition: height var(--transition-speed) ease;
 }
 
 
@@ -265,22 +269,26 @@ nav #nav .title {
 
 .step-enter {
   position: relative;
+  opacity: 0;
   transform: translateX(-100%);
 }
 
 .step-enter-active {
   transform: translateX(0%);
-  transition: transform 500ms ease;
+  opacity: 1;
+  transition: opacity calc(var(--transition-speed)*3/2) ease, transform var(--transition-speed) ease;
 }
 
 .step-exit {
   position: relative;
+  opacity: 1;
   transform: translateX(0%);
 }
 
 .step-exit-active {
+  opacity: 0;
   transform: translate(100%);
-  transition: transform 500ms ease;
+  transition: opacity calc(var(--transition-speed)/2) ease, transform var(--transition-speed) ease;
 }
 
 .content {

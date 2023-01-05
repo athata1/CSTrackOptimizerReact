@@ -11,7 +11,13 @@ export default function Step1({addTracksCallback, setHeightCallback}) {
   const parentRef = useRef();
 
   useEffect(() => {
-    setHeightCallback(parentRef.current.offsetHeight)
+    if (!parentRef.current) return;
+    console.log(parentRef.current)
+    const resizeObserber = new ResizeObserver(() => {
+      setHeightCallback(parentRef.current.offsetHeight);
+    });
+    resizeObserber.observe(parentRef.current);
+    return () => resizeObserber.disconnect();
   }, [])
 
   function toggleTrack(trackIndex) {
@@ -30,7 +36,7 @@ export default function Step1({addTracksCallback, setHeightCallback}) {
   }
 
   return (
-    <div ref={parentRef}className="content">
+    <div ref={parentRef} className="content">
         <div className="track-list">
           {trackNames.map((elem, idx) => {
             return <div 
