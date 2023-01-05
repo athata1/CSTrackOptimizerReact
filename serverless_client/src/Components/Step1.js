@@ -12,7 +12,6 @@ export default function Step1({addTracksCallback, setHeightCallback}) {
 
   useEffect(() => {
     if (!parentRef.current) return;
-    console.log(parentRef.current)
     const resizeObserber = new ResizeObserver(() => {
       setHeightCallback(parentRef.current.offsetHeight);
     });

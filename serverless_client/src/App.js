@@ -35,7 +35,6 @@ function App() {
     }
     classAlgo.current.addRequiredAndElectives();
     setStep(step + 1);
-    console.log(classAlgo.current)
   }
 
   //Change background color once app renders
@@ -51,7 +50,6 @@ function App() {
     for (const course of courses) {
         classAlgo.current.addCourse(course);
     }
-    console.log("Here: " + classAlgo.current.totalElectives);
     finalResult.current = classAlgo.current.getMinClasses();
     finalResult.current.sort((a,b) => Database.getCourse(a).localeCompare(Database.getCourse(b)))
     setLoading(false);
@@ -62,40 +60,40 @@ function App() {
       <Navbar/>
       <div id="box">
         <div className="container">
-            <div className="step">
-              Step {step}
-            </div>
-            <div className="instructions">{instructions[step - 1]}</div>
+          <div className="step">
+            Step {step}
+          </div>
+          <div className="instructions">{instructions[step - 1]}</div>
 
-            <div className='step-container' style={{height: currentHeight}}>
-              <CSSTransition
-                in={step === 1}
-                unmountOnExit
-                timeout={500}
-                classNames="step">
-                <div className='step-initial'>
-                  <Step1 addTracksCallback={addTracks} setHeightCallback={setCurrentHeight}/>
-                </div>
-              </CSSTransition>
-              <CSSTransition
-                in={step === 2}
-                unmountOnExit
-                timeout={500}
-                classNames="step">
-                <div className='step-initial'>
-                  <Step2 setHeightCallback={setCurrentHeight}handleCourseAdding={addCourses} electives = {[...classAlgo.current.totalElectives]}/>
-                </div>
-              </CSSTransition>
-              <CSSTransition
-                in={step === 3}
-                unmountOnExit
-                timeout={500}
-                classNames="step">
-                <div className='step-initial'>
-                  <Step3 setHeightCallback={setCurrentHeight} courseAlgo={classAlgo} loading={loading} finalCourseArray={finalResult}/> 
-                </div>
-              </CSSTransition>
-            </div>
+          <div className='step-container' style={{height: currentHeight}}>
+            <CSSTransition
+              in={step === 1}
+              unmountOnExit
+              timeout={500}
+              classNames="step">
+              <div className='step-initial'>
+                <Step1 addTracksCallback={addTracks} setHeightCallback={setCurrentHeight}/>
+              </div>
+            </CSSTransition>
+            <CSSTransition
+              in={step === 2}
+              unmountOnExit
+              timeout={500}
+              classNames="step">
+              <div className='step-initial'>
+                <Step2 setHeightCallback={setCurrentHeight}handleCourseAdding={addCourses} electives = {[...classAlgo.current.totalElectives]}/>
+              </div>
+            </CSSTransition>
+            <CSSTransition
+              in={step === 3}
+              unmountOnExit
+              timeout={500}
+              classNames="step">
+              <div className='step-initial'>
+                <Step3 setHeightCallback={setCurrentHeight} courseAlgo={classAlgo} loading={loading} finalCourseArray={finalResult}/> 
+              </div>
+            </CSSTransition>
+          </div>
         </div>
       </div>
     </>

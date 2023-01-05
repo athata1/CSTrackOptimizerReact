@@ -8,7 +8,6 @@ export default function Step3({loading, finalCourseArray, courseAlgo, setHeightC
 
   useEffect(() => {
     if (!parentRef.current) return;
-    console.log(parentRef.current)
     const resizeObserber = new ResizeObserver(() => {
       setHeightCallback(parentRef.current.offsetHeight);
     });
