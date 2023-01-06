@@ -17,7 +17,7 @@ export default function Step2({handleCourseAdding, electives, setHeightCallback}
     });
     resizeObserber.observe(parentRef.current);
     return () => resizeObserber.disconnect();
-  }, [])
+  }, [setHeightCallback])
 
   //This method switches the course from modifiedElectives to addedCourses
   function addCourse(courseNum) {

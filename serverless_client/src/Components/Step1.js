@@ -17,7 +17,7 @@ export default function Step1({addTracksCallback, setHeightCallback}) {
     });
     resizeObserber.observe(parentRef.current);
     return () => resizeObserber.disconnect();
-  }, [])
+  }, [setHeightCallback])
 
   function toggleTrack(trackIndex) {
       const newTracks = [...tracks];

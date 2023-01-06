@@ -13,7 +13,7 @@ export default function Step3({loading, finalCourseArray, courseAlgo, setHeightC
     });
     resizeObserber.observe(parentRef.current);
     return () => resizeObserber.disconnect();
-  }, [])
+  }, [setHeightCallback])
   //Display loader if required
   if (loading) {
     return <>
